@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.PanelButtonSide = new System.Windows.Forms.Panel();
             this.btnReplaceText = new System.Windows.Forms.Button();
@@ -55,7 +54,7 @@
             this.PanelButtonSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(213)))), ((int)(((byte)(255)))));
             this.PanelButtonSide.Location = new System.Drawing.Point(134, 114);
             this.PanelButtonSide.Name = "PanelButtonSide";
-            this.PanelButtonSide.Size = new System.Drawing.Size(6, 35);
+            this.PanelButtonSide.Size = new System.Drawing.Size(6, 45);
             this.PanelButtonSide.TabIndex = 1;
             // 
             // btnReplaceText
@@ -66,14 +65,14 @@
             this.btnReplaceText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReplaceText.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReplaceText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnReplaceText.Image = ((System.Drawing.Image)(resources.GetObject("btnReplaceText.Image")));
+            this.btnReplaceText.Image = global::xUtility.Properties.Resources.Replace;
             this.btnReplaceText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReplaceText.Location = new System.Drawing.Point(0, 114);
             this.btnReplaceText.Name = "btnReplaceText";
-            this.btnReplaceText.Size = new System.Drawing.Size(140, 35);
+            this.btnReplaceText.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.btnReplaceText.Size = new System.Drawing.Size(140, 45);
             this.btnReplaceText.TabIndex = 1;
-            this.btnReplaceText.Text = "Replace Text";
-            this.btnReplaceText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReplaceText.Text = " Replace Text";
             this.btnReplaceText.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReplaceText.UseVisualStyleBackColor = true;
             // 
