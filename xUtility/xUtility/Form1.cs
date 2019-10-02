@@ -16,5 +16,20 @@ namespace xUtility
         {
             InitializeComponent();
         }
+
+        private void btnReplaceText_Click(object sender, EventArgs e)
+        {
+            panelButtonSide.Top = btnReplaceText.Top;
+        }
+
+        private void btnReplaceImages_Click(object sender, EventArgs e)
+        {
+            panelButtonSide.Top = btnReplaceImages.Top;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
