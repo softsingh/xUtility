@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelButtonSide = new System.Windows.Forms.Panel();
+            this.btnReplaceTemplate = new System.Windows.Forms.Button();
             this.btnReplaceImages = new System.Windows.Forms.Button();
             this.btnReplaceText = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,7 +52,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnReplaceTemplate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtFindWhat = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -89,6 +89,26 @@
             this.panelButtonSide.Name = "panelButtonSide";
             this.panelButtonSide.Size = new System.Drawing.Size(6, 45);
             this.panelButtonSide.TabIndex = 1;
+            // 
+            // btnReplaceTemplate
+            // 
+            this.btnReplaceTemplate.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnReplaceTemplate.FlatAppearance.BorderSize = 0;
+            this.btnReplaceTemplate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(213)))), ((int)(((byte)(255)))));
+            this.btnReplaceTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReplaceTemplate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReplaceTemplate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnReplaceTemplate.Image = global::xUtility.Properties.Resources.Replace;
+            this.btnReplaceTemplate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReplaceTemplate.Location = new System.Drawing.Point(0, 203);
+            this.btnReplaceTemplate.Name = "btnReplaceTemplate";
+            this.btnReplaceTemplate.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.btnReplaceTemplate.Size = new System.Drawing.Size(160, 45);
+            this.btnReplaceTemplate.TabIndex = 3;
+            this.btnReplaceTemplate.Text = " Replace Template";
+            this.btnReplaceTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnReplaceTemplate.UseVisualStyleBackColor = true;
+            this.btnReplaceTemplate.Click += new System.EventHandler(this.btnReplaceTemplate_Click);
             // 
             // btnReplaceImages
             // 
@@ -156,6 +176,7 @@
             this.txtInputFolder.Name = "txtInputFolder";
             this.txtInputFolder.Size = new System.Drawing.Size(388, 20);
             this.txtInputFolder.TabIndex = 1;
+            this.txtInputFolder.Text = "C:\\Temp\\Input";
             // 
             // btnBrowseInputFolder
             // 
@@ -259,6 +280,8 @@
             // chkSameAsInputFolder
             // 
             this.chkSameAsInputFolder.AutoSize = true;
+            this.chkSameAsInputFolder.Checked = true;
+            this.chkSameAsInputFolder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSameAsInputFolder.Location = new System.Drawing.Point(149, 19);
             this.chkSameAsInputFolder.Name = "chkSameAsInputFolder";
             this.chkSameAsInputFolder.Size = new System.Drawing.Size(126, 17);
@@ -308,6 +331,7 @@
             this.btnStart.TabIndex = 9;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnExit
             // 
@@ -318,26 +342,6 @@
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnReplaceTemplate
-            // 
-            this.btnReplaceTemplate.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnReplaceTemplate.FlatAppearance.BorderSize = 0;
-            this.btnReplaceTemplate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(213)))), ((int)(((byte)(255)))));
-            this.btnReplaceTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReplaceTemplate.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReplaceTemplate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnReplaceTemplate.Image = global::xUtility.Properties.Resources.Replace;
-            this.btnReplaceTemplate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReplaceTemplate.Location = new System.Drawing.Point(0, 203);
-            this.btnReplaceTemplate.Name = "btnReplaceTemplate";
-            this.btnReplaceTemplate.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.btnReplaceTemplate.Size = new System.Drawing.Size(160, 45);
-            this.btnReplaceTemplate.TabIndex = 3;
-            this.btnReplaceTemplate.Text = " Replace Template";
-            this.btnReplaceTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnReplaceTemplate.UseVisualStyleBackColor = true;
-            this.btnReplaceTemplate.Click += new System.EventHandler(this.btnReplaceTemplate_Click);
             // 
             // groupBox5
             // 
