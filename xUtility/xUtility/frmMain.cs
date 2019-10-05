@@ -70,7 +70,7 @@ namespace xUtility
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if(chkDocx.Checked==false)
+            if(chkDocx.Checked == false)
             {
                 MessageBox.Show("Please select at least one file type", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -94,22 +94,29 @@ namespace xUtility
                 return;
             }
 
+            ReplaceTextOptions replaceTextOptions = new ReplaceTextOptions
+            {
+                docx = chkDocx.Checked,
+                xlsx = chkXlsx.Checked,
+                pptx = chkPptx.Checked,
+                txt = chkTxt.Checked,
+                html = chkHtml.Checked,
+
+                SameAsInputFolder = chkSameAsInputFolder.Checked,
+
+                InputFolder = txtInputFolder.Text,
+                OutputFolder = txtOutputFolder.Text,
+
+                FindWhat = txtFindWhat.Text,
+                ReplaceWith = txtReplaceWith.Text
+            };
+
+            ReplaceText replaceText = new ReplaceText(replaceTextOptions);
+
             try
             {
-                ReplaceTextOptions replaceTextOptions = new ReplaceTextOptions
-                {
-                    docx = true,
-                    InputFolder = txtInputFolder.Text,
-                    OutputFolder = txtOutputFolder.Text,
-                    SameAsInputFolder=true,
-                    FindWhat = txtFindWhat.Text,
-                    ReplaceWith = txtReplaceWith.Text
-                };
-
-                ReplaceText replaceText = new ReplaceText(replaceTextOptions);
-
-                replaceText.run();
-
+                replaceText.Run();
+                MessageBox.Show("Operation is Complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception Ex)
             {

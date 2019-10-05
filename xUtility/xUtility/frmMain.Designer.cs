@@ -223,6 +223,8 @@
             // chkTxt
             // 
             this.chkTxt.AutoSize = true;
+            this.chkTxt.Checked = true;
+            this.chkTxt.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTxt.Location = new System.Drawing.Point(178, 19);
             this.chkTxt.Name = "chkTxt";
             this.chkTxt.Size = new System.Drawing.Size(40, 17);
@@ -233,6 +235,8 @@
             // chkHtml
             // 
             this.chkHtml.AutoSize = true;
+            this.chkHtml.Checked = true;
+            this.chkHtml.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkHtml.Location = new System.Drawing.Point(224, 19);
             this.chkHtml.Name = "chkHtml";
             this.chkHtml.Size = new System.Drawing.Size(48, 17);
@@ -359,6 +363,7 @@
             this.txtFindWhat.Name = "txtFindWhat";
             this.txtFindWhat.Size = new System.Drawing.Size(429, 20);
             this.txtFindWhat.TabIndex = 1;
+            this.txtFindWhat.Text = "CT5/PHD";
             // 
             // groupBox6
             // 
@@ -376,6 +381,7 @@
             this.txtReplaceWith.Name = "txtReplaceWith";
             this.txtReplaceWith.Size = new System.Drawing.Size(429, 20);
             this.txtReplaceWith.TabIndex = 1;
+            this.txtReplaceWith.Text = "CPHD";
             // 
             // frmMain
             // 

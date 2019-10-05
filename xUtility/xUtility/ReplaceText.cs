@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace xUtility
 {
@@ -18,26 +19,63 @@ namespace xUtility
             replaceTextOptions = rto;
         }
 
-        public void run()
+        /// <summary>
+        /// Performs the Replace Text operation on .docx, .xlsx, .pptx, .txt and .html files
+        /// </summary>
+        /// <returns>void</returns>
+        public void Run()
         {
             string MyText;
-            IEnumerable<string> Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.docx", SearchOption.AllDirectories);
+            IEnumerable<string> Files;
 
-            foreach (string MyFile in Files)
+            if(replaceTextOptions.docx == true)
             {
-                using (WordprocessingDocument wdDoc = WordprocessingDocument.Open(MyFile, true))
+                Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.docx", SearchOption.AllDirectories);
+
+                foreach (string MyFile in Files)
                 {
-                    using (StreamReader sr = new StreamReader(wdDoc.MainDocumentPart.GetStream()))
+                    using (WordprocessingDocument wdDoc = WordprocessingDocument.Open(MyFile, true))
                     {
-                        MyText = sr.ReadToEnd();
+                        using (StreamReader sr = new StreamReader(wdDoc.MainDocumentPart.GetStream()))
+                        {
+                            MyText = sr.ReadToEnd();
+                        }
+
+                        Regex Rx = new Regex(replaceTextOptions.FindWhat);
+                        MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
+                    
+                        using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream(FileMode.Create)))
+                        {
+                            sw.Write(MyText);
+                        }
+                    }
+                }
+            }
+
+            if (replaceTextOptions.txt == true || replaceTextOptions.html == true)
+            {
+                Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.txt", SearchOption.AllDirectories)
+                    .Concat(Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.html", SearchOption.AllDirectories));
+
+                foreach (string MyFile in Files)
+                {
+                    using (FileStream fs = new FileStream(MyFile, FileMode.Open))
+                    {
+                        using (StreamReader sr = new StreamReader(fs))
+                        {
+                            MyText = sr.ReadToEnd();
+                        }
                     }
 
                     Regex Rx = new Regex(replaceTextOptions.FindWhat);
                     MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
 
-                    using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream(FileMode.Create)))
+                    using (FileStream fs = new FileStream(MyFile, FileMode.Create))
                     {
-                        sw.Write(MyText);
+                        using (StreamWriter sw = new StreamWriter(fs))
+                        {
+                            sw.Write(MyText);
+                        }
                     }
                 }
             }
