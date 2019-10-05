@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -79,37 +82,34 @@ namespace xUtility
                 return;
             }
 
-            if(chkSameAsInputFolder.Checked==false && !Directory.Exists(txtOutputFolder.Text))
+            if(chkSameAsInputFolder.Checked == false && !Directory.Exists(txtOutputFolder.Text))
             {
                 MessageBox.Show("Invalid Output Folder : " + txtOutputFolder.Text, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            if (txtFindWhat.Text == "")
+            {
+                MessageBox.Show("Empty Find Text", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
-                IEnumerable<string> Files = Directory.EnumerateFiles(txtInputFolder.Text, "*.docx", SearchOption.AllDirectories);
-
-                foreach (string MyFile in Files)
+                ReplaceTextOptions replaceTextOptions = new ReplaceTextOptions
                 {
-                    using (WordprocessingDocument wdDoc = WordprocessingDocument.Open(FilePath, true))
-                    {
-                        string MyText;
+                    docx = true,
+                    InputFolder = txtInputFolder.Text,
+                    OutputFolder = txtOutputFolder.Text,
+                    SameAsInputFolder=true,
+                    FindWhat = txtFindWhat.Text,
+                    ReplaceWith = txtReplaceWith.Text
+                };
 
-                        using (StreamReader sr = new StreamReader(wdDoc.MainDocumentPart.GetStream()))
-                        {
-                            MyText = sr.ReadToEnd();
-                        }
+                ReplaceText replaceText = new ReplaceText(replaceTextOptions);
 
-                        Regex Rx = new Regex("CT5/PHD");
-                        MyText = Rx.Replace(MyText, "CPHD");
+                replaceText.run();
 
-                        using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream(FileMode.Create)))
-                        {
-                            sw.Write(MyText);
-                        }
-                    }
-
-                }
             }
             catch(Exception Ex)
             {
