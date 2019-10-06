@@ -20,6 +20,11 @@ namespace xUtility
         public frmMain()
         {
             InitializeComponent();
+
+            if (chkSameAsInputFolder.Checked == true)
+                chkSameAsInputFolder_CheckedChanged(this, new EventArgs());
+            else
+                chkSameAsInputFolder.Checked = true; 
         }
 
         private void btnReplaceText_Click(object sender, EventArgs e)
@@ -121,6 +126,20 @@ namespace xUtility
             catch(Exception Ex)
             {
                 MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void chkSameAsInputFolder_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkSameAsInputFolder.Checked == true)
+            {
+                txtOutputFolder.Enabled = false;
+                btnBrowseOutputFolder.Enabled = false;
+            }
+            else
+            {
+                txtOutputFolder.Enabled = true;
+                btnBrowseOutputFolder.Enabled = true;
             }
         }
     }

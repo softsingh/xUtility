@@ -292,6 +292,7 @@
             this.chkSameAsInputFolder.TabIndex = 5;
             this.chkSameAsInputFolder.Text = "Same as Input Folder";
             this.chkSameAsInputFolder.UseVisualStyleBackColor = true;
+            this.chkSameAsInputFolder.CheckedChanged += new System.EventHandler(this.chkSameAsInputFolder_CheckedChanged);
             // 
             // txtOutputFolder
             // 
