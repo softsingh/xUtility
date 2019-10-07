@@ -107,6 +107,7 @@ namespace xUtility
                 txt = chkTxt.Checked,
                 html = chkHtml.Checked,
 
+                IncludeSubdirectories = chkIncludeSubdirectories.Checked,
                 SameAsInputFolder = chkSameAsInputFolder.Checked,
 
                 InputFolder = txtInputFolder.Text,

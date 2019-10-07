@@ -28,9 +28,14 @@ namespace xUtility
             string MyText;
             IEnumerable<string> Files;
 
+            //Create Directories
+
             if(replaceTextOptions.docx == true)
             {
-                Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.docx", SearchOption.AllDirectories);
+                if(replaceTextOptions.IncludeSubdirectories==true)
+                    Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.docx", SearchOption.AllDirectories);
+                else
+                    Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.docx", SearchOption.TopDirectoryOnly);
 
                 foreach (string MyFile in Files)
                 {
@@ -54,8 +59,12 @@ namespace xUtility
 
             if (replaceTextOptions.txt == true || replaceTextOptions.html == true)
             {
-                Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.txt", SearchOption.AllDirectories)
+                if (replaceTextOptions.IncludeSubdirectories == true)
+                    Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.txt", SearchOption.AllDirectories)
                     .Concat(Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.html", SearchOption.AllDirectories));
+                else
+                    Files = Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly)
+                    .Concat(Directory.EnumerateFiles(replaceTextOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly));
 
                 foreach (string MyFile in Files)
                 {

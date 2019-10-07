@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace xUtility
 {
-    class ReplaceTextOptions
+    class CopyAllOptions
     {
         public bool docx;
         public bool xlsx;
@@ -15,12 +15,8 @@ namespace xUtility
         public bool html;
 
         public bool IncludeSubdirectories;
-        public bool SameAsInputFolder;
 
         public string InputFolder;
         public string OutputFolder;
-
-        public string FindWhat;
-        public string ReplaceWith;
     }
 }

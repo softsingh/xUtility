@@ -56,6 +56,7 @@
             this.txtFindWhat = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtReplaceWith = new System.Windows.Forms.TextBox();
+            this.chkIncludeSubdirectories = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -251,7 +252,7 @@
             this.groupBox1.Controls.Add(this.chkXlsx);
             this.groupBox1.Controls.Add(this.chkTxt);
             this.groupBox1.Controls.Add(this.chkPptx);
-            this.groupBox1.Location = new System.Drawing.Point(272, 10);
+            this.groupBox1.Location = new System.Drawing.Point(195, 10);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(282, 45);
             this.groupBox1.TabIndex = 5;
@@ -384,11 +385,24 @@
             this.txtReplaceWith.TabIndex = 1;
             this.txtReplaceWith.Text = "CPHD";
             // 
+            // chkIncludeSubdirectories
+            // 
+            this.chkIncludeSubdirectories.AutoSize = true;
+            this.chkIncludeSubdirectories.Checked = true;
+            this.chkIncludeSubdirectories.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIncludeSubdirectories.Location = new System.Drawing.Point(505, 29);
+            this.chkIncludeSubdirectories.Name = "chkIncludeSubdirectories";
+            this.chkIncludeSubdirectories.Size = new System.Drawing.Size(131, 17);
+            this.chkIncludeSubdirectories.TabIndex = 13;
+            this.chkIncludeSubdirectories.Text = "Include Subdirectories";
+            this.chkIncludeSubdirectories.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 448);
+            this.Controls.Add(this.chkIncludeSubdirectories);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnExit);
@@ -419,6 +433,7 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -452,6 +467,7 @@
         private System.Windows.Forms.TextBox txtFindWhat;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox txtReplaceWith;
+        private System.Windows.Forms.CheckBox chkIncludeSubdirectories;
     }
 }
 
