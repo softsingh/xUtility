@@ -46,27 +46,33 @@ namespace xUtility
                         {
                             MyText = sr.ReadToEnd();
                         }
-                    }
+                        Regex Rx = new Regex(replaceTextOptions.FindWhat);
+                        MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
 
-                    Regex Rx = new Regex(replaceTextOptions.FindWhat);
-                    MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
-
-                    FileInfo NewPath = new FileInfo(MyFile.Replace(replaceTextOptions.InputFolder, replaceTextOptions.OutputFolder));
-
-                    if (!Directory.Exists(NewPath.DirectoryName))
-                    {
-                        Directory.CreateDirectory(NewPath.DirectoryName);
-                    }
-
-                    using (WordprocessingDocument wdDoc = WordprocessingDocument.Create(NewPath.FullName, WordprocessingDocumentType.Document))
-                    {
-                        wdDoc.AddMainDocumentPart();
-
-                        using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream()))
+                        using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream(FileMode.Create)))
                         {
                             sw.Write(MyText);
                         }
                     }
+
+                    
+
+                    //FileInfo NewPath = new FileInfo(MyFile.Replace(replaceTextOptions.InputFolder, replaceTextOptions.OutputFolder));
+
+                    //if (!Directory.Exists(NewPath.DirectoryName))
+                    //{
+                    //    Directory.CreateDirectory(NewPath.DirectoryName);
+                    //}
+
+                    //using (WordprocessingDocument wdDoc = WordprocessingDocument.Create(NewPath.FullName, WordprocessingDocumentType.Document))
+                    //{
+                    //    wdDoc.AddMainDocumentPart();
+
+                    //    using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream()))
+                    //    {
+                    //        sw.Write(MyText);
+                    //    }
+                    //}
                 }
             }
 
@@ -92,14 +98,14 @@ namespace xUtility
                     Regex Rx = new Regex(replaceTextOptions.FindWhat);
                     MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
 
-                    FileInfo NewPath = new FileInfo(MyFile.Replace(replaceTextOptions.InputFolder, replaceTextOptions.OutputFolder));
+                    //FileInfo NewPath = new FileInfo(MyFile.Replace(replaceTextOptions.InputFolder, replaceTextOptions.OutputFolder));
 
-                    if (!Directory.Exists(NewPath.DirectoryName))
-                    {
-                        Directory.CreateDirectory(NewPath.DirectoryName);
-                    }
+                    //if (!Directory.Exists(NewPath.DirectoryName))
+                    //{
+                    //    Directory.CreateDirectory(NewPath.DirectoryName);
+                    //}
 
-                    using (FileStream fs = new FileStream(NewPath.DirectoryName, FileMode.Create))
+                    using (FileStream fs = new FileStream(MyFile, FileMode.Create))
                     {
                         using (StreamWriter sw = new StreamWriter(fs))
                         {
