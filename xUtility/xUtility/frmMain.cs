@@ -40,6 +40,11 @@ namespace xUtility
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+
+            //FileInfo fi = new FileInfo(@"C:\Temp\Input\Convocation RFP Letter - Template.docx");
+
+            //MessageBox.Show(fi.DirectoryName);
+
         }
 
         private void btnReplaceTemplate_Click(object sender, EventArgs e)
@@ -119,21 +124,22 @@ namespace xUtility
 
             ReplaceText replaceText = new ReplaceText(replaceTextOptions);
 
-            try
-            {
+            //try
+            //{
                 replaceText.Run();
                 MessageBox.Show("Operation is Complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch(Exception Ex)
-            {
-                MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //}
+           // catch(Exception Ex)
+            //{
+                //MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void chkSameAsInputFolder_CheckedChanged(object sender, EventArgs e)
         {
             if(chkSameAsInputFolder.Checked == true)
             {
+                txtOutputFolder.Text = txtInputFolder.Text;
                 txtOutputFolder.Enabled = false;
                 btnBrowseOutputFolder.Enabled = false;
             }

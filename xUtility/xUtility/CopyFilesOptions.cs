@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace xUtility
 {
-    class CopyAllOptions
+    class CopyFilesOptions
     {
         public bool docx;
         public bool xlsx;

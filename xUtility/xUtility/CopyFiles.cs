@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace xUtility
 {
-    class CopyAll
+    class CopyFiles
     {
         /// <summary>
         /// Copy Files and Directories recursively from Source to Destination with Filters specified in CopyFileOptions
         /// </summary>
-        /// <param name="copyAllOptions">Path to database file</param>
+        /// <param name="CopyAllOptions">All copy file options</param>
         /// <returns>void</returns>
-        public void Run(CopyAllOptions copyAllOptions)
+        public void Run(CopyFilesOptions copyAllOptions)
         {
 
         }

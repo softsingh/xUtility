@@ -47,8 +47,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CopyAll.cs" />
-    <Compile Include="CopyAllOptions.cs" />
+    <Compile Include="CopyFiles.cs" />
+    <Compile Include="CopyFilesOptions.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
