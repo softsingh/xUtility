@@ -39,11 +39,18 @@ namespace xUtility
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
 
-            //FileInfo fi = new FileInfo(@"C:\Temp\Input\Convocation RFP Letter - Template.docx");
+            CopyFilesOptions copyFilesOptions = new CopyFilesOptions()
+            {
+                docx = true,
+                IncludeSubdirectories=true,
+                InputFolder = @"C:\Temp\Input",
+                OutputFolder = @"C:\Temp\Output",
+            };
 
-            //MessageBox.Show(fi.DirectoryName);
+            CopyFiles copyFiles = new CopyFiles();
+            copyFiles.Run(copyFilesOptions);
 
         }
 
@@ -59,6 +66,11 @@ namespace xUtility
                 ShowNewFolderButton = false
             };
 
+            if(Directory.Exists(txtInputFolder.Text))
+            {
+                FolderDlg.SelectedPath = txtInputFolder.Text;
+            }
+
             if(FolderDlg.ShowDialog()==DialogResult.OK)
             {
                 txtInputFolder.Text = FolderDlg.SelectedPath;
@@ -72,7 +84,12 @@ namespace xUtility
                 ShowNewFolderButton = true
             };
 
-            if(FolderDlg.ShowDialog() == DialogResult.OK)
+            if (Directory.Exists(txtOutputFolder.Text))
+            {
+                FolderDlg.SelectedPath = txtOutputFolder.Text;
+            }
+
+            if (FolderDlg.ShowDialog() == DialogResult.OK)
             {
                 txtOutputFolder.Text = FolderDlg.SelectedPath;
             }
@@ -124,15 +141,15 @@ namespace xUtility
 
             ReplaceText replaceText = new ReplaceText(replaceTextOptions);
 
-            //try
-            //{
+            try
+            {
                 replaceText.Run();
                 MessageBox.Show("Operation is Complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-           // catch(Exception Ex)
-            //{
-                //MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch(Exception Ex)
+            {
+                MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void chkSameAsInputFolder_CheckedChanged(object sender, EventArgs e)
@@ -147,6 +164,14 @@ namespace xUtility
             {
                 txtOutputFolder.Enabled = true;
                 btnBrowseOutputFolder.Enabled = true;
+            }
+        }
+
+        private void txtInputFolder_TextChanged(object sender, EventArgs e)
+        {
+            if(chkSameAsInputFolder.Checked==true)
+            {
+                txtOutputFolder.Text = txtInputFolder.Text;
             }
         }
     }

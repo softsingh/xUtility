@@ -19,8 +19,8 @@ namespace xUtility
             if (copyFilesOptions.docx == false && 
                 copyFilesOptions.xlsx == false && 
                 copyFilesOptions.pptx == false && 
-                copyFilesOptions.html == false && 
-                copyFilesOptions.txt == false)
+                copyFilesOptions.txt  == false && 
+                copyFilesOptions.html == false)
             {
                 return;
             }
@@ -45,22 +45,34 @@ namespace xUtility
 
             if (copyFilesOptions.xlsx == true)
             {
-                Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.xlsx", SearchOption.TopDirectoryOnly));
+                if (Files == null)
+                    Files=Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.xlsx", SearchOption.TopDirectoryOnly);
+                else
+                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.xlsx", SearchOption.TopDirectoryOnly));
             }
 
             if (copyFilesOptions.pptx == true)
             {
-                Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.pptx", SearchOption.TopDirectoryOnly));
-            }
-
-            if (copyFilesOptions.html == true)
-            {
-                Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly));
+                if (Files == null)
+                    Files = Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.pptx", SearchOption.TopDirectoryOnly);
+                else
+                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.pptx", SearchOption.TopDirectoryOnly));
             }
 
             if (copyFilesOptions.txt == true)
             {
-                Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly));
+                if (Files == null)
+                    Files = Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly);
+                else
+                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly));
+            }
+
+            if (copyFilesOptions.html == true)
+            {
+                if (Files == null)
+                    Files = Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly);
+                else
+                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly));
             }
 
             // Copy each file into it's new directory.
@@ -70,17 +82,33 @@ namespace xUtility
                 fi.CopyTo(Path.Combine(copyFilesOptions.OutputFolder, fi.Name), true);
             }
 
-            // Copy each subdirectory using recursion.
-            //if (copyFilesOptions.IncludeSubdirectories == true)
-            //{
-            //    foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
-            //    {
-            //        DirectoryInfo nextTargetSubDir =
-            //            target.CreateSubdirectory(diSourceSubDir.Name);
-            //        CopyAll(diSourceSubDir, nextTargetSubDir);
-            //    }
-            //}
-                
+            //Copy each subdirectory using recursion.
+            if (copyFilesOptions.IncludeSubdirectories == true)
+            {
+                DirectoryInfo InputDI = new DirectoryInfo(copyFilesOptions.InputFolder);
+                DirectoryInfo OutputDI = new DirectoryInfo(copyFilesOptions.OutputFolder);
+
+                foreach (DirectoryInfo SubDI in InputDI.GetDirectories())
+                {
+                    DirectoryInfo NextSubDI =
+                        OutputDI.CreateSubdirectory(SubDI.Name);
+
+                    CopyFilesOptions SubDirCFO = new CopyFilesOptions()
+                    {
+                        docx = copyFilesOptions.docx,
+                        xlsx = copyFilesOptions.xlsx,
+                        pptx = copyFilesOptions.pptx,
+                        txt = copyFilesOptions.txt,
+                        html = copyFilesOptions.html,
+                        IncludeSubdirectories = copyFilesOptions.IncludeSubdirectories,
+
+                        InputFolder = SubDI.FullName,
+                        OutputFolder = NextSubDI.FullName,
+                    };
+
+                    Run(SubDirCFO);
+                }
+            }
         }
     }
 }

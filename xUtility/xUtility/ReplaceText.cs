@@ -40,39 +40,27 @@ namespace xUtility
 
                 foreach (string MyFile in Files)
                 {
-                    using (WordprocessingDocument wdDoc = WordprocessingDocument.Open(MyFile, true))
+                    try
                     {
-                        using (StreamReader sr = new StreamReader(wdDoc.MainDocumentPart.GetStream()))
+                        using (WordprocessingDocument wdDoc = WordprocessingDocument.Open(MyFile, true))
                         {
-                            MyText = sr.ReadToEnd();
-                        }
-                        Regex Rx = new Regex(replaceTextOptions.FindWhat);
-                        MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
+                            using (StreamReader sr = new StreamReader(wdDoc.MainDocumentPart.GetStream()))
+                            {
+                                MyText = sr.ReadToEnd();
+                            }
+                            Regex Rx = new Regex(replaceTextOptions.FindWhat);
+                            MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
 
-                        using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream(FileMode.Create)))
-                        {
-                            sw.Write(MyText);
+                            using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream(FileMode.Create)))
+                            {
+                                sw.Write(MyText);
+                            }
                         }
                     }
-
-                    
-
-                    //FileInfo NewPath = new FileInfo(MyFile.Replace(replaceTextOptions.InputFolder, replaceTextOptions.OutputFolder));
-
-                    //if (!Directory.Exists(NewPath.DirectoryName))
-                    //{
-                    //    Directory.CreateDirectory(NewPath.DirectoryName);
-                    //}
-
-                    //using (WordprocessingDocument wdDoc = WordprocessingDocument.Create(NewPath.FullName, WordprocessingDocumentType.Document))
-                    //{
-                    //    wdDoc.AddMainDocumentPart();
-
-                    //    using (StreamWriter sw = new StreamWriter(wdDoc.MainDocumentPart.GetStream()))
-                    //    {
-                    //        sw.Write(MyText);
-                    //    }
-                    //}
+                    catch (Exception Ex)
+                    {
+                        throw new Exception(Ex.Message + Environment.NewLine + MyFile);
+                    }
                 }
             }
 
@@ -87,30 +75,31 @@ namespace xUtility
 
                 foreach (string MyFile in Files)
                 {
-                    using (FileStream fs = new FileStream(MyFile, FileMode.Open))
+                    try
                     {
-                        using (StreamReader sr = new StreamReader(fs))
+                        using (FileStream fs = new FileStream(MyFile, FileMode.Open))
                         {
-                            MyText = sr.ReadToEnd();
+                            using (StreamReader sr = new StreamReader(fs))
+                            {
+                                MyText = sr.ReadToEnd();
+                            }
+                        }
+                    
+
+                        Regex Rx = new Regex(replaceTextOptions.FindWhat);
+                        MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
+
+                        using (FileStream fs = new FileStream(MyFile, FileMode.Create))
+                        {
+                            using (StreamWriter sw = new StreamWriter(fs))
+                            {
+                                sw.Write(MyText);
+                            }
                         }
                     }
-
-                    Regex Rx = new Regex(replaceTextOptions.FindWhat);
-                    MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);
-
-                    //FileInfo NewPath = new FileInfo(MyFile.Replace(replaceTextOptions.InputFolder, replaceTextOptions.OutputFolder));
-
-                    //if (!Directory.Exists(NewPath.DirectoryName))
-                    //{
-                    //    Directory.CreateDirectory(NewPath.DirectoryName);
-                    //}
-
-                    using (FileStream fs = new FileStream(MyFile, FileMode.Create))
+                    catch (Exception Ex)
                     {
-                        using (StreamWriter sw = new StreamWriter(fs))
-                        {
-                            sw.Write(MyText);
-                        }
+                        throw new Exception(Ex.Message + Environment.NewLine + MyFile);
                     }
                 }
             }

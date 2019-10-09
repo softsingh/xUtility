@@ -177,7 +177,7 @@
             this.txtInputFolder.Name = "txtInputFolder";
             this.txtInputFolder.Size = new System.Drawing.Size(388, 20);
             this.txtInputFolder.TabIndex = 1;
-            this.txtInputFolder.Text = "C:\\Temp\\Input";
+            this.txtInputFolder.TextChanged += new System.EventHandler(this.txtInputFolder_TextChanged);
             // 
             // btnBrowseInputFolder
             // 
