@@ -39,19 +39,7 @@ namespace xUtility
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            //Application.Exit();
-
-            CopyFilesOptions copyFilesOptions = new CopyFilesOptions()
-            {
-                docx = true,
-                IncludeSubdirectories=true,
-                InputFolder = @"C:\Temp\Input",
-                OutputFolder = @"C:\Temp\Output",
-            };
-
-            CopyFiles copyFiles = new CopyFiles();
-            copyFiles.Run(copyFilesOptions);
-
+            Application.Exit();
         }
 
         private void btnReplaceTemplate_Click(object sender, EventArgs e)
@@ -109,12 +97,6 @@ namespace xUtility
                 return;
             }
 
-            if(chkSameAsInputFolder.Checked == false && !Directory.Exists(txtOutputFolder.Text))
-            {
-                MessageBox.Show("Invalid Output Folder : " + txtOutputFolder.Text, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             if (txtFindWhat.Text == "")
             {
                 MessageBox.Show("Empty Find Text", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -138,6 +120,22 @@ namespace xUtility
                 FindWhat = txtFindWhat.Text,
                 ReplaceWith = txtReplaceWith.Text
             };
+
+            if (chkSameAsInputFolder.Checked == false)
+            {
+                if(txtOutputFolder.Text=="")
+                {
+                    MessageBox.Show("Output Folder Path is Empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                CopyFilesOptions copyFilesOptions = new CopyFilesOptions(replaceTextOptions);
+
+                CopyFiles copyFiles = new CopyFiles();
+                copyFiles.Run(copyFilesOptions);
+
+                replaceTextOptions.InputFolder = replaceTextOptions.OutputFolder;
+            }
 
             ReplaceText replaceText = new ReplaceText(replaceTextOptions);
 

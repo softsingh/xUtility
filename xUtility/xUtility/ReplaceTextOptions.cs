@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 
 namespace xUtility
 {
-    class ReplaceTextOptions
+    class ReplaceTextOptions: Options
     {
-        public bool docx;
-        public bool xlsx;
-        public bool pptx;
-        public bool txt;
-        public bool html;
+        public bool SameAsInputFolder { get; set; }
+        public string FindWhat { get; set; }
+        public string ReplaceWith { get; set; }
 
-        public bool IncludeSubdirectories;
-        public bool SameAsInputFolder;
+        public ReplaceTextOptions() : base()
+        {
+        }
 
-        public string InputFolder;
-        public string OutputFolder;
+        public ReplaceTextOptions(Options options) : base(options)
+        {
+        }
 
-        public string FindWhat;
-        public string ReplaceWith;
+        public ReplaceTextOptions(ReplaceTextOptions RTO) : base(RTO)
+        {
+            SameAsInputFolder = RTO.SameAsInputFolder;
+            FindWhat = RTO.FindWhat;
+            ReplaceWith = RTO.ReplaceWith;
+        }
     }
 }

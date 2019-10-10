@@ -93,15 +93,8 @@ namespace xUtility
                     DirectoryInfo NextSubDI =
                         OutputDI.CreateSubdirectory(SubDI.Name);
 
-                    CopyFilesOptions SubDirCFO = new CopyFilesOptions()
+                    CopyFilesOptions SubDirCFO = new CopyFilesOptions(copyFilesOptions)
                     {
-                        docx = copyFilesOptions.docx,
-                        xlsx = copyFilesOptions.xlsx,
-                        pptx = copyFilesOptions.pptx,
-                        txt = copyFilesOptions.txt,
-                        html = copyFilesOptions.html,
-                        IncludeSubdirectories = copyFilesOptions.IncludeSubdirectories,
-
                         InputFolder = SubDI.FullName,
                         OutputFolder = NextSubDI.FullName,
                     };

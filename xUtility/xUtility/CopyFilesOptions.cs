@@ -6,17 +6,14 @@ using System.Threading.Tasks;
 
 namespace xUtility
 {
-    class CopyFilesOptions
+    class CopyFilesOptions: Options
     {
-        public bool docx;
-        public bool xlsx;
-        public bool pptx;
-        public bool txt;
-        public bool html;
+        public CopyFilesOptions(): base()
+        {
+        }
 
-        public bool IncludeSubdirectories;
-
-        public string InputFolder;
-        public string OutputFolder;
+        public CopyFilesOptions(Options options) : base(options)
+        {
+        }
     }
 }

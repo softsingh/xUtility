@@ -109,6 +109,7 @@
             this.btnReplaceTemplate.Text = " Replace Template";
             this.btnReplaceTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReplaceTemplate.UseVisualStyleBackColor = true;
+            this.btnReplaceTemplate.Visible = false;
             this.btnReplaceTemplate.Click += new System.EventHandler(this.btnReplaceTemplate_Click);
             // 
             // btnReplaceImages
@@ -129,6 +130,7 @@
             this.btnReplaceImages.Text = " Replace Images";
             this.btnReplaceImages.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReplaceImages.UseVisualStyleBackColor = true;
+            this.btnReplaceImages.Visible = false;
             this.btnReplaceImages.Click += new System.EventHandler(this.btnReplaceImages_Click);
             // 
             // btnReplaceText
