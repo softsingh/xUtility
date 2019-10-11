@@ -29,8 +29,6 @@ namespace xUtility
             string MyText;
             IEnumerable<string> Files;
 
-            //Create Directories
-
             if(replaceTextOptions.docx == true)
             {
                 if(replaceTextOptions.IncludeSubdirectories==true)
@@ -84,7 +82,6 @@ namespace xUtility
                                 MyText = sr.ReadToEnd();
                             }
                         }
-                    
 
                         Regex Rx = new Regex(replaceTextOptions.FindWhat);
                         MyText = Rx.Replace(MyText, replaceTextOptions.ReplaceWith);

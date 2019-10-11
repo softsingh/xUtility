@@ -130,9 +130,16 @@ namespace xUtility
                 }
 
                 CopyFilesOptions copyFilesOptions = new CopyFilesOptions(replaceTextOptions);
-
                 CopyFiles copyFiles = new CopyFiles();
-                copyFiles.Run(copyFilesOptions);
+
+                try
+                {
+                    copyFiles.Run(copyFilesOptions);
+                }
+                catch (Exception Ex)
+                {
+                    MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 replaceTextOptions.InputFolder = replaceTextOptions.OutputFolder;
             }

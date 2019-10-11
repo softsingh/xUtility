@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -48,7 +49,7 @@ namespace xUtility
                 if (Files == null)
                     Files=Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.xlsx", SearchOption.TopDirectoryOnly);
                 else
-                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.xlsx", SearchOption.TopDirectoryOnly));
+                    Files = Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.xlsx", SearchOption.TopDirectoryOnly));
             }
 
             if (copyFilesOptions.pptx == true)
@@ -56,7 +57,7 @@ namespace xUtility
                 if (Files == null)
                     Files = Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.pptx", SearchOption.TopDirectoryOnly);
                 else
-                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.pptx", SearchOption.TopDirectoryOnly));
+                    Files = Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.pptx", SearchOption.TopDirectoryOnly));
             }
 
             if (copyFilesOptions.txt == true)
@@ -64,7 +65,7 @@ namespace xUtility
                 if (Files == null)
                     Files = Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly);
                 else
-                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly));
+                    Files = Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.txt", SearchOption.TopDirectoryOnly));
             }
 
             if (copyFilesOptions.html == true)
@@ -72,7 +73,7 @@ namespace xUtility
                 if (Files == null)
                     Files = Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly);
                 else
-                    Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly));
+                    Files = Files.Concat(Directory.EnumerateFiles(copyFilesOptions.InputFolder, "*.html", SearchOption.TopDirectoryOnly));
             }
 
             // Copy each file into it's new directory.
