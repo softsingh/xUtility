@@ -1,17 +1,9 @@
-﻿using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static xUtility.Utils;
 
 namespace xUtility
 {
@@ -85,7 +77,9 @@ namespace xUtility
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if(chkDocx.Checked == false)
+            ErrorFlag = false;
+
+            if (chkDocx.Checked == false)
             {
                 MessageBox.Show("Please select at least one file type", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -121,6 +115,12 @@ namespace xUtility
                 ReplaceWith = txtReplaceWith.Text
             };
 
+            Log.CreateEntry();
+            Log.CreateEntry("#", RepeatTextCount: 100);
+            Log.CreateEntry("ReplaceText Operation Started");
+            Log.CreateEntry("#", RepeatTextCount: 100);
+            Log.CreateEntry();
+
             if (chkSameAsInputFolder.Checked == false)
             {
                 if(txtOutputFolder.Text=="")
@@ -132,13 +132,22 @@ namespace xUtility
                 CopyFilesOptions copyFilesOptions = new CopyFilesOptions(replaceTextOptions);
                 CopyFiles copyFiles = new CopyFiles();
 
-                try
-                {
+                //try
+                //{
                     copyFiles.Run(copyFilesOptions);
-                }
-                catch (Exception Ex)
+                //}
+                //catch (Exception Ex)
+                //{
+                //    ErrorFlag = true;
+                //    Log.CreateEntry("-", RepeatTextCount: 100);
+                //    Log.CreateEntry("CopyFiles: " + Ex.Message, "ERR");
+                //    Log.CreateEntry("-", RepeatTextCount: 100);
+                //}
+
+                if (ErrorFlag)
                 {
-                    MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error Occured in Copying Files. View Log File for more Information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 replaceTextOptions.InputFolder = replaceTextOptions.OutputFolder;
@@ -146,14 +155,40 @@ namespace xUtility
 
             ReplaceText replaceText = new ReplaceText(replaceTextOptions);
 
-            try
-            {
+            //try
+            //{
                 replaceText.Run();
-                MessageBox.Show("Operation is Complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch(Exception Ex)
+            //}
+            //catch(Exception Ex)
+            //{
+            //    ErrorFlag = true;
+
+            //    Log.CreateEntry("-", RepeatTextCount: 100);
+            //    Log.CreateEntry("Error: " + Ex.Message, "ERR");
+            //    Log.CreateEntry("-", RepeatTextCount: 100);
+
+            //    MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
+            if (ErrorFlag)
             {
-                MessageBox.Show("Error : " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Log.CreateEntry();
+                Log.CreateEntry("#", RepeatTextCount: 100);
+                Log.CreateEntry("Replace Text Operation Finished with Errors");
+                Log.CreateEntry("#", RepeatTextCount: 100);
+                Log.CreateEntry();
+
+                MessageBox.Show("Replace Text Operation Finished with Errors. View Log File for more Information", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Log.CreateEntry();
+                Log.CreateEntry("#", RepeatTextCount: 100);
+                Log.CreateEntry("Replace Text Operation is Complete");
+                Log.CreateEntry("#", RepeatTextCount: 100);
+                Log.CreateEntry();
+
+                MessageBox.Show("Replace Text Operation is Complete", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -178,6 +213,11 @@ namespace xUtility
             {
                 txtOutputFolder.Text = txtInputFolder.Text;
             }
+        }
+
+        private void btnViewLog_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", Log.LOG_FOLDER);
         }
     }
 }

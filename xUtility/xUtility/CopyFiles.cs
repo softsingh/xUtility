@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using static xUtility.Utils;
 
 namespace xUtility
 {
@@ -80,7 +79,20 @@ namespace xUtility
             foreach (string MyFile in Files)
             {
                 FileInfo fi = new FileInfo(MyFile);
-                fi.CopyTo(Path.Combine(copyFilesOptions.OutputFolder, fi.Name), true);
+
+                try
+                {
+                    Log.CreateEntry("Copying File : " + Path.Combine(copyFilesOptions.OutputFolder, fi.Name), "INFO");
+                    fi.CopyTo(Path.Combine(copyFilesOptions.OutputFolder, fi.Name), true);
+                }
+                catch( Exception Ex)
+                {
+                    ErrorFlag = true;
+
+                    Log.CreateEntry("-", RepeatTextCount: 100);
+                    Log.CreateEntry("CopyFiles : " + Ex.Message, "ERR");
+                    Log.CreateEntry("-", RepeatTextCount: 100);
+                }
             }
 
             //Copy each subdirectory using recursion.
@@ -91,16 +103,27 @@ namespace xUtility
 
                 foreach (DirectoryInfo SubDI in InputDI.GetDirectories())
                 {
-                    DirectoryInfo NextSubDI =
+                    try
+                    {
+                        DirectoryInfo NextSubDI =
                         OutputDI.CreateSubdirectory(SubDI.Name);
 
-                    CopyFilesOptions SubDirCFO = new CopyFilesOptions(copyFilesOptions)
-                    {
-                        InputFolder = SubDI.FullName,
-                        OutputFolder = NextSubDI.FullName,
-                    };
+                        CopyFilesOptions SubDirCFO = new CopyFilesOptions(copyFilesOptions)
+                        {
+                            InputFolder = SubDI.FullName,
+                            OutputFolder = NextSubDI.FullName,
+                        };
 
-                    Run(SubDirCFO);
+                        Run(SubDirCFO);
+                    }
+                    catch(Exception Ex)
+                    {
+                        ErrorFlag = true;
+
+                        Log.CreateEntry("-", RepeatTextCount: 100);
+                        Log.CreateEntry("CopyFiles: " + Ex.Message, "ERR");
+                        Log.CreateEntry("-", RepeatTextCount: 100);
+                    }
                 }
             }
         }

@@ -57,6 +57,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtReplaceWith = new System.Windows.Forms.TextBox();
             this.chkIncludeSubdirectories = new System.Windows.Forms.CheckBox();
+            this.btnViewLog = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -287,8 +288,6 @@
             // chkSameAsInputFolder
             // 
             this.chkSameAsInputFolder.AutoSize = true;
-            this.chkSameAsInputFolder.Checked = true;
-            this.chkSameAsInputFolder.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSameAsInputFolder.Location = new System.Drawing.Point(149, 19);
             this.chkSameAsInputFolder.Name = "chkSameAsInputFolder";
             this.chkSameAsInputFolder.Size = new System.Drawing.Size(126, 17);
@@ -399,11 +398,22 @@
             this.chkIncludeSubdirectories.Text = "Include Subdirectories";
             this.chkIncludeSubdirectories.UseVisualStyleBackColor = true;
             // 
+            // btnViewLog
+            // 
+            this.btnViewLog.Location = new System.Drawing.Point(195, 411);
+            this.btnViewLog.Name = "btnViewLog";
+            this.btnViewLog.Size = new System.Drawing.Size(75, 23);
+            this.btnViewLog.TabIndex = 14;
+            this.btnViewLog.Text = "View Log";
+            this.btnViewLog.UseVisualStyleBackColor = true;
+            this.btnViewLog.Click += new System.EventHandler(this.btnViewLog_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(653, 448);
+            this.Controls.Add(this.btnViewLog);
             this.Controls.Add(this.chkIncludeSubdirectories);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
@@ -470,6 +480,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox txtReplaceWith;
         private System.Windows.Forms.CheckBox chkIncludeSubdirectories;
+        private System.Windows.Forms.Button btnViewLog;
     }
 }
 

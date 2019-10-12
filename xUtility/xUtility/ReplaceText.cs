@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using DocumentFormat.OpenXml.Packaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
-using DocumentFormat.OpenXml;
+
+using static xUtility.Utils;
 
 namespace xUtility
 {
@@ -38,6 +36,8 @@ namespace xUtility
 
                 foreach (string MyFile in Files)
                 {
+                    Log.CreateEntry("ReplaceText : " + MyFile, "INFO");
+
                     try
                     {
                         using (WordprocessingDocument wdDoc = WordprocessingDocument.Open(MyFile, true))
@@ -57,7 +57,11 @@ namespace xUtility
                     }
                     catch (Exception Ex)
                     {
-                        throw new Exception(Ex.Message + Environment.NewLine + MyFile);
+                        ErrorFlag = true;
+
+                        Log.CreateEntry("-", RepeatTextCount: 100);
+                        Log.CreateEntry(Ex.Message, "ERR");
+                        Log.CreateEntry("-", RepeatTextCount: 100);
                     }
                 }
             }
@@ -75,6 +79,8 @@ namespace xUtility
                 {
                     try
                     {
+                        Log.CreateEntry("ReplaceText : " + MyFile, "INFO");
+
                         using (FileStream fs = new FileStream(MyFile, FileMode.Open))
                         {
                             using (StreamReader sr = new StreamReader(fs))
@@ -94,9 +100,13 @@ namespace xUtility
                             }
                         }
                     }
-                    catch (Exception Ex)
+                        catch (Exception Ex)
                     {
-                        throw new Exception(Ex.Message + Environment.NewLine + MyFile);
+                        ErrorFlag = true;
+
+                        Log.CreateEntry("-", RepeatTextCount: 100);
+                        Log.CreateEntry(Ex.Message, "ERR");
+                        Log.CreateEntry("-", RepeatTextCount: 100);
                     }
                 }
             }
